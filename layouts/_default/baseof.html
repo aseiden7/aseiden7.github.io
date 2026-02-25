@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} | {{ site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ site.Params.description }}{{ end }}">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="/favicon.ico">
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="site-brand">
+        <a href="/" class="site-title">{{ site.Title }}</a>
+        {{ with site.Params.subtitle }}<span class="site-subtitle">{{ . }}</span>{{ end }}
+      </div>
+      <nav>
+        {{ range site.Menus.main }}
+        <a href="{{ .URL }}" class="nav-link{{ if eq $.RelPermalink .URL }} active{{ end }}">{{ .Name }}</a>
+        {{ end }}
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="social-links">
+        {{ with site.Params.github }}<a href="{{ . }}" class="social-link" target="_blank" rel="noopener noreferrer">GitHub</a>{{ end }}
+        {{ with site.Params.linkedin }}<a href="{{ . }}" class="social-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>{{ end }}
+        {{ with site.Params.bluesky }}<a href="{{ . }}" class="social-link" target="_blank" rel="noopener noreferrer">Bluesky</a>{{ end }}
+        {{ with site.Params.orcid }}<a href="{{ . }}" class="social-link" target="_blank" rel="noopener noreferrer">ORCID</a>{{ end }}
+        {{ with site.Params.google_scholar }}<a href="{{ . }}" class="social-link" target="_blank" rel="noopener noreferrer">Google Scholar</a>{{ end }}
+        {{ with site.Params.researchgate }}<a href="{{ . }}" class="social-link" target="_blank" rel="noopener noreferrer">ResearchGate</a>{{ end }}
+        {{ with site.Params.email }}<a href="mailto:{{ . }}" class="social-link">Email</a>{{ end }}
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
